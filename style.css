@@ -1,0 +1,9 @@
+body, html {
+    overflow: hidden;
+}
+
+canvas {
+    position: absolute;
+    background: rgb(3,0,60);
+    background: linear-gradient(166deg, rgba(3,0,60,1) 0%, rgba(38,10,31,1) 100%);
+}
