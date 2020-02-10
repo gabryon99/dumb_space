@@ -62,12 +62,12 @@ const game_loop = (elapsed) => {
     earth_index = (earth_index + 1) % earth_points.length;    
     mars_index = (mars_index + 1) % mars_points.length;    
 
-
     stars_front_sun.forEach(s => {
         s.x = (s.x + s.velocity) % canvas.width;
         if (s.x == 0) s.y = Math.random() * canvas.height + 1;
         draw_star(s.size, s.x, s.y, s.speed)
     });
+
 
     pid = window.requestAnimationFrame(game_loop);
 };
@@ -137,13 +137,13 @@ const get_line_points = (ax, ay, bx, by, speed = 20, tolerance = 2.25) => {
     }
 
     points.push(new Vector2(bx, by));
-
+    
     return points;
 }
 
 const draw_orbit = (orbits_count, first_angle, second_angle, radius = 200) => {
 
-    const y_radius = 30;
+    const y_radius = 40;
 
     for (let i = 0; i < orbits_count; i++) {
 
@@ -221,12 +221,12 @@ const draw_earth = () => {
 const draw_mars = () => {
     const mars = document.getElementById('mars');
     const size = 90;
-    console.log(mars_points);
     ctx.drawImage(mars, mars_points[mars_index].get_x() - size / 2, mars_points[mars_index].get_y() - size / 2, size, size);
 }
 
 
-// -------------------------------
+// ----------------------------------------------------
+
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -246,7 +246,7 @@ for (let i = 0; i < 200; i++) {
     const x = Math.random() * canvas.width + 10;
     const y = Math.random() * canvas.height + 10;
     const size = Math.random() * 10 + 2;
-    const speed = Math.random() * 300 + 50;
+    const speed = Math.random() * 400 + 50;
     const velocity = Math.random() + 0.1;
 
     star_cords.push({ x: x, y: y, size: size, speed: speed, velocity: velocity });
@@ -262,12 +262,12 @@ let mars_index = 0;
 const earth_orbit_0pi = linspace_ellipse(
     (canvas.width / 2) - (10 / 2), 
     (canvas.height / 2) - (10 / 2),
-    200 * ((1 / 1.3) + 1), 30 * 2, 0, 1
+    200 * ((2 / 1.3) + 1), 40 * 3, 0, 1, 2
 );
 const earth_orbit_pi0 = linspace_ellipse(
     (canvas.width / 2) - (10 / 2), 
     (canvas.height / 2) - (10 / 2),
-    200 * ((1 / 1.3) + 1), 30 * 2, 1, 2
+    200 * ((2 / 1.3) + 1), 40 * 3, 1, 2, 2
 );
 
 const earth_points = [...earth_orbit_0pi, ...earth_orbit_pi0];
@@ -275,12 +275,12 @@ const earth_points = [...earth_orbit_0pi, ...earth_orbit_pi0];
 const mars_orbit_0pi = linspace_ellipse(
     (canvas.width / 2) - (10 / 2), 
     (canvas.height / 2) - (10 / 2),
-    200 * ((2 / 1.3) + 1), 30 * 3, 0, 1, 3
+    200 * ((3 / 1.3) + 1), 40 * 4, 0, 1, 3
 );
 const mars_orbit_pi0 = linspace_ellipse(
     (canvas.width / 2) - (10 / 2), 
-    (canvas.height / 2) - (10 / 2),
-    200 * ((2 / 1.3) + 1), 30 * 3, 1, 2, 3
+    (canvas.height / 2) - (10 / 2)  ,
+    200 * ((3 / 1.3) + 1), 40 * 4, 1, 2, 3
 );
 
 const mars_points = [...mars_orbit_0pi, ...mars_orbit_pi0];
